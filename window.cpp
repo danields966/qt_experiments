@@ -39,12 +39,21 @@
 ****************************************************************************/
 
 #include <QtWidgets>
+#include <QTextStream>
 
 #include "window.h"
+#include "goLib/goLib.h"
 
 //! [0]
 Window::Window()
 {
+    QMessageBox msgBox;
+    msgBox.setText("Hello from Golang! " + QString::number(fact(10)));
+    msgBox.exec();
+
+    QTextStream out(stdout);
+    out << "Logging some stuff" << endl;
+
     QGroupBox *echoGroup = new QGroupBox(tr("Echo"));
 
     QLabel *echoLabel = new QLabel(tr("Mode:"));
