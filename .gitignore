@@ -92,3 +92,7 @@ CMakeLists.txt.user*
 
 # Python byte code
 *.pyc
+
+# Golang distros
+go/
+go*.zip

@@ -26,6 +26,8 @@
     sudo rm -rf /usr/local/Qt-5.6-release/
     sudo make install
 
+For x86_64 just replace configure argument `-platform linux-g++-32` to `-platform linux-g++-64`
+
 Example of shared requirements of compiled binary with this setup:
 
     ldd qt-experiments
@@ -52,7 +54,9 @@ Output:
     libz.so.1 => /lib/i386-linux-gnu/libz.so.1 (0xb789e000)
     libpng12.so.0 => /lib/i386-linux-gnu/libpng12.so.0 (0xb7873000)
 
-## Qt 5.6.4 static build instructions for Windows (MinGW 4.9.2):
+## Qt 5.6.4 static build instructions for Windows 11 (MinGW 8.1.0):
+
+Download, unpack and add to PATH compiler MinGW `i686-8.1.0-release-posix-dwarf-rt_v6-rev0`, then
 
     git clone -b 5.6 https://code.qt.io/qt/qt5.git
     ren qt5 "Qt-5.6"
@@ -65,3 +69,5 @@ Output:
     
     mingw32-make
     mingw32-make install
+
+For x86_64 compilation all instructions are the same, just replace compiler to `x86_64-8.1.0-release-posix-seh-rt_v6-rev0`
