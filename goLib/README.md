@@ -3,7 +3,7 @@
 ### 32-bit:
 
     $ProgressPreference = "SilentlyContinue"
-    $GolangDistro = "go1.10.windows-386.zip"
+    $GolangDistro = "go1.20.windows-386.zip"
     Invoke-WebRequest "https://go.dev/dl/$GolangDistro" -OutFile "$GolangDistro"
     Expand-Archive "$GolangDistro" -DestinationPath .
 
@@ -19,7 +19,7 @@
 ### 64-bit:
 
     $ProgressPreference = "SilentlyContinue"
-    $GolangDistro = "go1.10.windows-amd64.zip"
+    $GolangDistro = "go1.20.windows-amd64.zip"
     Invoke-WebRequest "https://go.dev/dl/$GolangDistro" -OutFile "$GolangDistro"
     Expand-Archive "$GolangDistro" -DestinationPath .
 
@@ -32,11 +32,14 @@
 
     go build -buildmode c-archive goLib.go
 
+
+To build lib for Windows XP, use Golang distro `go1.10.windows-386.zip` for 32-bit or `go1.10.windows-amd64.zip` for 64-bit
+
 ## Build Golang lib on Linux
 
 ### 32-bit:
 
-    export GOLANGDISTRO=go1.10.linux-386.tar.gz
+    export GOLANGDISTRO=go1.20.linux-386.tar.gz
     wget https://go.dev/dl/$GOLANGDISTRO
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GOLANGDISTRO
     export PATH=$PATH:/usr/local/go/bin
@@ -45,7 +48,7 @@
 
 ### 64-bit:
 
-    export GOLANGDISTRO=go1.10.linux-amd64.tar.gz
+    export GOLANGDISTRO=go1.20.linux-amd64.tar.gz
     wget https://go.dev/dl/$GOLANGDISTRO
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GOLANGDISTRO
     export PATH=$PATH:/usr/local/go/bin
