@@ -1,6 +1,8 @@
 # qt-experiments
 
-## Qt 5.6.4 static build instructions for Linux:
+For Windows XP and older Linux versions a better option is Qt 5.6
+
+## Qt 5.6 static build instructions for Linux:
 
 ### Ubuntu 16.04
 
@@ -54,7 +56,7 @@ Output:
     libz.so.1 => /lib/i386-linux-gnu/libz.so.1 (0xb789e000)
     libpng12.so.0 => /lib/i386-linux-gnu/libpng12.so.0 (0xb7873000)
 
-## Qt 5.6.4 static build instructions for Windows 11 (MinGW 8.1.0):
+## Qt 5.6 static build instructions for Windows 11 (MinGW 8.1.0):
 
 Download, unpack and add to PATH compiler MinGW `i686-8.1.0-release-posix-dwarf-rt_v6-rev0`, then
 
