@@ -51,3 +51,23 @@
     export PATH=$PATH:/usr/local/go/bin
     go version
     go build -buildmode c-archive goLib.go
+
+## Build Golang lib on FreeBSD
+
+### 32-bit:
+
+    export GOLANGDISTRO=go1.20.freebsd-386.tar.gz
+    wget https://go.dev/dl/$GOLANGDISTRO
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GOLANGDISTRO
+    export PATH=$PATH:/usr/local/go/bin
+    go version
+    go build -buildmode c-archive goLib.go
+
+### 64-bit:
+
+    export GOLANGDISTRO=go1.20.freebsd-amd64.tar.gz
+    wget https://go.dev/dl/$GOLANGDISTRO
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GOLANGDISTRO
+    export PATH=$PATH:/usr/local/go/bin
+    go version
+    go build -buildmode c-archive goLib.go
