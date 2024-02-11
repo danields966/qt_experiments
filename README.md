@@ -4,7 +4,7 @@ For Windows XP and older Linux versions a better option is Qt 5.6
 
 ## Qt 5.6 static build instructions for Linux:
 
-### Ubuntu 16.04
+### Raspberry OS
 
     sudo apt update
     sudo apt upgrade
@@ -15,6 +15,13 @@ For Windows XP and older Linux versions a better option is Qt 5.6
     
     sudo apt install libfreetype6 libfreetype6-dev libfontconfig1-dev
     
+    # ???
+    sudo apt-get build-dep qt5-qmake
+    sudo apt-get build-dep libqt5gui5
+    sudo apt-get build-dep libqt5webengine-data
+    sudo apt-get build-dep libqt5webkit5
+    sudo apt-get install libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver
+
     git clone -b 5.6 https://code.qt.io/qt/qt5.git
     mv qt5 Qt-5.6
     cd Qt-5.6
@@ -22,7 +29,7 @@ For Windows XP and older Linux versions a better option is Qt 5.6
     
     git submodule foreach --recursive "git clean -dfx"
     
-    ./configure -prefix "/usr/local/Qt-5.6-release" -static -platform linux-g++-32 -release -opensource -confirm-license -fontconfig -system-freetype -no-cups -no-dbus -no-gif -no-iconv -no-icu -no-opengl -no-openssl -no-openvg -no-qml-debug -no-sql-sqlite -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-xcb -qt-xkbcommon-x11 -qt-zlib -nomake examples -nomake tests -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtenginio -skip qtfeedback -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick1 -skip qtquickcontrols -skip qtquickcontrols2 -skip qtrepotools -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebkit -skip qtwebkit-examples -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
+    ./configure -prefix "/usr/local/Qt-5.6-release" -static -release -opensource -confirm-license -fontconfig -system-freetype -no-cups -no-dbus -no-gif -no-iconv -no-icu -no-opengl -no-openssl -no-openvg -no-qml-debug -no-sql-sqlite -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-xcb -qt-xkbcommon-x11 -qt-zlib -nomake examples -nomake tests -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtenginio -skip qtfeedback -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick1 -skip qtquickcontrols -skip qtquickcontrols2 -skip qtrepotools -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebkit -skip qtwebkit-examples -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
     
     make
     sudo rm -rf /usr/local/Qt-5.6-release/
