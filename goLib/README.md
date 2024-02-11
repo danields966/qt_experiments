@@ -4,7 +4,7 @@
 
 ### 64-bit:
 
-    export GOLANGDISTRO=go1.20.0.darwin-amd64.tar.gz
+    export GOLANGDISTRO=go1.20.darwin-amd64.tar.gz
     wget https://go.dev/dl/$GOLANGDISTRO
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $GOLANGDISTRO
     export PATH=$PATH:/usr/local/go/bin
