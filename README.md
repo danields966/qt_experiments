@@ -15,13 +15,6 @@ For Windows XP and older Linux versions a better option is Qt 5.6
     
     sudo apt install libfreetype6 libfreetype6-dev libfontconfig1-dev
     
-    # ???
-    sudo apt-get build-dep qt5-qmake
-    sudo apt-get build-dep libqt5gui5
-    sudo apt-get build-dep libqt5webengine-data
-    sudo apt-get build-dep libqt5webkit5
-    sudo apt-get install libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver
-
     git clone -b 5.6 https://code.qt.io/qt/qt5.git
     mv qt5 Qt-5.6
     cd Qt-5.6
@@ -31,11 +24,9 @@ For Windows XP and older Linux versions a better option is Qt 5.6
     
     ./configure -prefix "/usr/local/Qt-5.6-release" -static -release -opensource -confirm-license -fontconfig -system-freetype -no-cups -no-dbus -no-gif -no-iconv -no-icu -no-opengl -no-openssl -no-openvg -no-qml-debug -no-sql-sqlite -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-xcb -qt-xkbcommon-x11 -qt-zlib -nomake examples -nomake tests -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtenginio -skip qtfeedback -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick1 -skip qtquickcontrols -skip qtquickcontrols2 -skip qtrepotools -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebkit -skip qtwebkit-examples -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
     
-    make
+    gmake
     sudo rm -rf /usr/local/Qt-5.6-release/
-    sudo make install
-
-For x86_64 just replace configure argument `-platform linux-g++-32` to `-platform linux-g++-64`
+    sudo gmake install
 
 Example of shared requirements of compiled binary with this setup:
 
@@ -43,40 +34,26 @@ Example of shared requirements of compiled binary with this setup:
 
 Output:
 
-    linux-gate.so.1 =>  (0xb7f43000)
-    libX11.so.6 => /usr/lib/i386-linux-gnu/libX11.so.6 (0xb7dde000)
-    libX11-xcb.so.1 => /usr/lib/i386-linux-gnu/libX11-xcb.so.1 (0xb7ddb000)
-    libxcb.so.1 => /usr/lib/i386-linux-gnu/libxcb.so.1 (0xb7db5000)
-    libfontconfig.so.1 => /usr/lib/i386-linux-gnu/libfontconfig.so.1 (0xb7d6c000)
-    libfreetype.so.6 => /usr/lib/i386-linux-gnu/libfreetype.so.6 (0xb7cbb000)
-    libdl.so.2 => /lib/i386-linux-gnu/libdl.so.2 (0xb7cb6000)
-    librt.so.1 => /lib/i386-linux-gnu/librt.so.1 (0xb7cad000)
-    libpthread.so.0 => /lib/i386-linux-gnu/libpthread.so.0 (0xb7c90000)
-    libstdc++.so.6 => /usr/lib/i386-linux-gnu/libstdc++.so.6 (0xb7b19000)
-    libm.so.6 => /lib/i386-linux-gnu/libm.so.6 (0xb7ac3000)
-    libgcc_s.so.1 => /lib/i386-linux-gnu/libgcc_s.so.1 (0xb7aa6000)
-    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb78ef000)
-    /lib/ld-linux.so.2 (0xb7f45000)
-    libXau.so.6 => /usr/lib/i386-linux-gnu/libXau.so.6 (0xb78eb000)
-    libXdmcp.so.6 => /usr/lib/i386-linux-gnu/libXdmcp.so.6 (0xb78e4000)
-    libexpat.so.1 => /lib/i386-linux-gnu/libexpat.so.1 (0xb78b9000)
-    libz.so.1 => /lib/i386-linux-gnu/libz.so.1 (0xb789e000)
-    libpng12.so.0 => /lib/i386-linux-gnu/libpng12.so.0 (0xb7873000)
-
-## Qt 5.6 static build instructions for Windows 11 (MinGW 8.1.0):
-
-Download, unpack and add to PATH compiler MinGW `i686-8.1.0-release-posix-dwarf-rt_v6-rev0`, then
-
-    git clone -b 5.6 https://code.qt.io/qt/qt5.git
-    ren qt5 "Qt-5.6"
-    cd Qt-5.6
-    git clone -b 5.6 https://code.qt.io/qt/qtbase.git
-    
-    git submodule foreach --recursive "git clean -dfx"
-    
-    ./configure -prefix "C:\Qt\Qt-5.6-debug-and-release" -static -static-runtime -target xp -platform win32-g++ -debug-and-release -opensource -confirm-license -no-angle -no-cups -no-dbus -no-fontconfig -no-gif -no-iconv -no-icu -no-incredibuild-xge -no-nis -no-opengl -no-openssl -no-openvg -no-qml-debug -no-sql-sqlite -no-ssl -qmake -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -nomake examples -nomake tests -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtconnectivity -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtenginio -skip qtfeedback -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtmacextras -skip qtmultimedia -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick1 -skip qtquickcontrols -skip qtquickcontrols2 -skip qtrepotools -skip qtscript -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebkit -skip qtwebkit-examples -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
-    
-    mingw32-make
-    mingw32-make install
-
-For x86_64 compilation all instructions are the same, just replace compiler to `x86_64-8.1.0-release-posix-seh-rt_v6-rev0`
+	linux-vdso.so.1 (0x00007fffa84e8000)
+	libX11-xcb.so.1 => /lib/aarch64-linux-gnu/libX11-xcb.so.1 (0x00007fffa7470000)
+	libSM.so.6 => /lib/aarch64-linux-gnu/libSM.so.6 (0x00007fffa7450000)
+	libICE.so.6 => /lib/aarch64-linux-gnu/libICE.so.6 (0x00007fffa7420000)
+	libxcb.so.1 => /lib/aarch64-linux-gnu/libxcb.so.1 (0x00007fffa73d0000)
+	libX11.so.6 => /lib/aarch64-linux-gnu/libX11.so.6 (0x00007fffa7270000)
+	libfontconfig.so.1 => /lib/aarch64-linux-gnu/libfontconfig.so.1 (0x00007fffa7200000)
+	libfreetype.so.6 => /lib/aarch64-linux-gnu/libfreetype.so.6 (0x00007fffa7120000)
+	libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x00007fffa6f00000)
+	libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x00007fffa6e60000)
+	libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x00007fffa6e20000)
+	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x00007fffa6c60000)
+	libuuid.so.1 => /lib/aarch64-linux-gnu/libuuid.so.1 (0x00007fffa6c30000)
+	/lib/ld-linux-aarch64.so.1 (0x00007fffa84b0000)
+	libbsd.so.0 => /lib/aarch64-linux-gnu/libbsd.so.0 (0x00007fffa6bf0000)
+	libXau.so.6 => /lib/aarch64-linux-gnu/libXau.so.6 (0x00007fffa6bd0000)
+	libXdmcp.so.6 => /lib/aarch64-linux-gnu/libXdmcp.so.6 (0x00007fffa6bb0000)
+	libexpat.so.1 => /lib/aarch64-linux-gnu/libexpat.so.1 (0x00007fffa6b60000)
+	libz.so.1 => /lib/aarch64-linux-gnu/libz.so.1 (0x00007fffa6b20000)
+	libpng16.so.16 => /lib/aarch64-linux-gnu/libpng16.so.16 (0x00007fffa6ac0000)
+	libbrotlidec.so.1 => /lib/aarch64-linux-gnu/libbrotlidec.so.1 (0x00007fffa6a90000)
+	libmd.so.0 => /lib/aarch64-linux-gnu/libmd.so.0 (0x00007fffa6a60000)
+	libbrotlicommon.so.1 => /lib/aarch64-linux-gnu/libbrotlicommon.so.1 (0x00007fffa6a20000)
