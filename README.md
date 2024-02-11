@@ -14,7 +14,7 @@ Install Qt Creator and required libs:
 
     sudo port install qt4-creator-mac
 
-    sudo port install freetype +universal
+    sudo port install fontconfig freetype +universal
 
 Compile Qt:
 
