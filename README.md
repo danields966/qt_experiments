@@ -23,6 +23,8 @@ Compile Qt (GCC 12.2.0, perl 5.36.3):
     cd Qt-5.6
     git clone -b 5.6 https://code.qt.io/qt/qtbase.git
     
+    git submodule foreach --recursive "git clean -dfx"
+    
     ./configure -prefix "/usr/local/Qt-5.6-release" -static -platform freebsd-g++ -release -opensource -confirm-license -fontconfig -system-freetype -no-cups -no-dbus -no-gif -no-iconv -no-icu -no-opengl -no-openssl -no-openvg -no-pch -no-qml-debug -no-sql-sqlite -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-xcb -qt-xkbcommon-x11 -qt-zlib -nomake examples -nomake tests
     
     make
