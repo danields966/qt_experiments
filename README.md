@@ -4,7 +4,7 @@
 
 Install Xorg and Xfce for better appearance:
 
-    pkg install xorg 
+    pkg install xorg
     echo "kern.vty=vt" >> /boot/loader.conf
     
     pkg install drm-kmod
@@ -17,8 +17,6 @@ Install Xorg and Xfce for better appearance:
 Compile Qt (GCC 12.2.0, perl 5.36.3):
 
     pkg install git gcc nano curl wget
-    
-    pkg install -g libxcb* libX11*
     
     git clone -b 5.6 https://code.qt.io/qt/qt5.git
     mv qt5 Qt-5.6
