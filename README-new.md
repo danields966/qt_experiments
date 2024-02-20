@@ -4,32 +4,37 @@
 
 ### Ubuntu 16.04
 
-### Warning: This setup is not working yet
+Install requirements:
 
     sudo apt update
     sudo apt upgrade
     
-    sudo apt install git p7zip-full
+    sudo apt install git p7zip-full qtcreator
     
     sudo apt install libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev libglu1-mesa-dev libdrm-dev libxdamage-dev libglapi-mesa libglapi-mesa libxext6 libxxf86vm-dev libc6-dev libssl-dev libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libpulse-dev libasound2-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libwayland-dev
-    --sudo apt install libzstd-dev
-    --sudo apt-get install freetds-dev
-    --cmake kdelibs5-data subversion ubuntu-sdk
 
-    -------sudo apt install libxcb1 libxcb1-dev libx11-xcb1 libx11-xcb-dev libxcb-keysyms1 libxcb-keysyms1-dev libxcb-image0 libxcb-image0-dev libxcb-shm0 libxcb-shm0-dev libxcb-icccm4 libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxrender-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0 libxcb-render-util0-dev libxcb-glx0-dev
-    
-    -------sudo apt install libfreetype6 libfreetype6-dev libfontconfig1-dev
-    
+Clone Qt 5.15:
+
     git clone -b 5.15 https://code.qt.io/qt/qt5.git
     mv qt5 Qt-5.15
     cd Qt-5.15
     git clone -b 5.15 https://code.qt.io/qt/qtbase.git
-    
+
+Or:
+
     wget http://danields966.ru:9724/Qt-5.15.7z
     7z x Qt-5.15.7z
-    
+    cd Qt-5.15
+
+Apply patch to remove xinerama:
+
+    cp <path_to_repository>/remove-xinerama.patch qtbase/
+    cd qtbase
     git apply remove-xinerama.patch
-    
+    cd ..
+
+Compile Qt:
+
     git submodule foreach --recursive "git clean -dfx"
     
     ./configure -v -prefix "/usr/local/Qt-5.15-release" -platform linux-g++-64 -static -optimize-size -ltcg -release -opensource -confirm-license -fontconfig -system-freetype -bundled-xcb-xinput -nomake examples -nomake tests -nomake tools -no-cups -no-dbus -no-gif -no-iconv -no-icu -no-opengl -no-openssl -no-openvg -no-pch -no-sql-sqlite -make libs -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -skip wayland -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtfeedback -skip qtgamepad -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtlottie -skip qtmacextras -skip qtmultimedia -skip qtnetworkauth -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick3d -skip qtquickcontrols -skip qtquickcontrols2 -skip qtquicktimeline -skip qtremoteobjects -skip qtrepotools -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebglplugin -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
@@ -70,11 +75,24 @@ Output:
 
 Download, unpack and add to PATH compiler MinGW `i686-8.1.0-release-posix-dwarf-rt_v6-rev0`, then
 
+Clone Qt 5.15:
+
     git clone -b 5.15 https://code.qt.io/qt/qt5.git
     ren qt5 "Qt-5.15"
     cd Qt-5.15
     git clone -b 5.15 https://code.qt.io/qt/qtbase.git
-    
+
+Or:
+
+    $ProgressPreference = "SilentlyContinue"
+    $QtDistro = "Qt-5.15"
+    $QtDistro7z = "$QtDistro.7z"
+    Invoke-WebRequest "http://danields966.ru:9724/$QtDistro7z" -OutFile "$QtDistro7z"
+    & 'C:\Program Files\7-Zip\7z.exe' x $QtDistro7z -o"$QtDistro"
+    cd Qt-5.15
+
+Compile Qt:
+
     git submodule foreach --recursive "git clean -dfx"
     
     ./configure -v -prefix "C:\Qt\Qt-5.15-debug-and-release" -platform win32-g++ -static -optimize-size -static-runtime -debug-and-release -opensource -confirm-license -nomake examples -nomake tests -nomake tools -no-angle -no-cups -no-dbus -no-fontconfig -no-gif -no-iconv -no-icu -no-incredibuild-xge -no-opengl -no-openssl -no-openvg -no-pch -no-sql-sqlite -no-ssl -make libs -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtfeedback -skip qtgamepad -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtlottie -skip qtmacextras -skip qtmultimedia -skip qtnetworkauth -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick3d -skip qtquickcontrols -skip qtquickcontrols2 -skip qtquicktimeline -skip qtremoteobjects -skip qtrepotools -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebglplugin -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
