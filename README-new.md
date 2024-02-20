@@ -28,8 +28,10 @@ Or:
 
 Apply patch to remove xinerama:
 
-    cp <path_to_repository>/remove-xinerama.patch qtbase/
-    cd qtbase
+    cd ..
+    git clone -b testing https://github.com/danields966/qt-experiments.git
+    cp qt-experiments/remove-xinerama.patch Qt-5.15/qtbase/
+    cd Qt-5.15/qtbase
     git apply remove-xinerama.patch
     cd ..
 
@@ -88,7 +90,7 @@ Or:
     $QtDistro = "Qt-5.15"
     $QtDistro7z = "$QtDistro.7z"
     Invoke-WebRequest "http://danields966.ru:9724/$QtDistro7z" -OutFile "$QtDistro7z"
-    & 'C:\Program Files\7-Zip\7z.exe' x $QtDistro7z -o"$QtDistro"
+    & 'C:\Program Files\7-Zip\7z.exe' x $QtDistro7z -o"."
     cd Qt-5.15
 
 Compile Qt:

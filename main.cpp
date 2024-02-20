@@ -7,7 +7,7 @@
 #include "coloritem.h"
 #include "robot.h"
 
-#include <Calculator.h>
+#include <calculator.h>
 #include <math.h>
 #include "mainwindow.h"
 
