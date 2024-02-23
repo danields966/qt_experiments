@@ -48,20 +48,27 @@
 **
 ****************************************************************************/
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef COLORITEM_H
+#define COLORITEM_H
 
-#include <QToolButton>
+#include <QGraphicsItem>
 
 //! [0]
-class Button : public QToolButton
+class ColorItem : public QGraphicsItem
 {
-    Q_OBJECT
-
 public:
-    explicit Button(const QString &text, QWidget *parent = 0);
+    ColorItem();
 
-    QSize sizeHint() const override;
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
+private:
+    QColor color;
 };
 //! [0]
 

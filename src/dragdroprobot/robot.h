@@ -48,70 +48,96 @@
 **
 ****************************************************************************/
 
-#ifndef CALCULATOR_H
-#define CALCULATOR_H
+#ifndef ROBOT_H
+#define ROBOT_H
 
-#include <QWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
 
 QT_BEGIN_NAMESPACE
-class QLineEdit;
+class QGraphicsSceneMouseEvent;
+class QParallelAnimationGroup;
 QT_END_NAMESPACE
-class Button;
 
 //! [0]
-class Calculator : public QWidget
+class RobotPart : public QGraphicsObject
 {
-    Q_OBJECT
-
 public:
-    Calculator(QWidget *parent = 0);
+    RobotPart(QGraphicsItem *parent = nullptr);
 
-private slots:
-    void digitClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void pointClicked();
-    void changeSignClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
-    void clearMemory();
-    void readMemory();
-    void setMemory();
-    void addToMemory();
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event) override;
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event) override;
+    void dropEvent(QGraphicsSceneDragDropEvent *event) override;
+
+    QColor color = Qt::lightGray;
+    bool dragOver = false;
+};
 //! [0]
 
 //! [1]
+class RobotHead : public RobotPart
+{
+public:
+    RobotHead(QGraphicsItem *parent = nullptr);
+
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event) override;
+    void dropEvent(QGraphicsSceneDragDropEvent *event) override;
+
 private:
-//! [1] //! [2]
-    Button *createButton(const QString &text, const char *member);
-    void abortOperation();
-    bool calculate(double rightOperand, const QString &pendingOperator);
+    QPixmap pixmap;
+};
+//! [1]
+
+//! [2]
+class RobotTorso : public RobotPart
+{
+public:
+    using RobotPart::RobotPart;
+
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+};
 //! [2]
 
 //! [3]
-    double sumInMemory;
-//! [3] //! [4]
-    double sumSoFar;
-//! [4] //! [5]
-    double factorSoFar;
-//! [5] //! [6]
-    QString pendingAdditiveOperator;
-//! [6] //! [7]
-    QString pendingMultiplicativeOperator;
-//! [7] //! [8]
-    bool waitingForOperand;
-//! [8]
+class RobotLimb : public RobotPart
+{
+public:
+    RobotLimb(QGraphicsItem *parent = nullptr);
 
-//! [9]
-    QLineEdit *display;
-//! [9] //! [10]
-
-    enum { NumDigitButtons = 10 };
-    Button *digitButtons[NumDigitButtons];
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 };
-//! [10]
+//! [3]
+
+//! [4]
+class Robot : public RobotPart
+{
+public:
+    Robot(QGraphicsItem *parent = nullptr);
+
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+};
+//! [4]
+
+class GraphicsView : public QGraphicsView
+{
+public:
+    GraphicsView(QGraphicsScene *scene) : QGraphicsView(scene)
+    {
+    }
+
+protected:
+    void resizeEvent(QResizeEvent *) override
+    {
+    }
+};
 
 #endif

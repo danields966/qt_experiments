@@ -48,26 +48,21 @@
 **
 ****************************************************************************/
 
-#include <QtWidgets>
+#ifndef BUTTON_H
+#define BUTTON_H
 
-#include "button.h"
+#include <QToolButton>
 
 //! [0]
-Button::Button(const QString &text, QWidget *parent)
-    : QToolButton(parent)
+class Button : public QToolButton
 {
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    setText(text);
-}
+    Q_OBJECT
+
+public:
+    explicit Button(const QString &text, QWidget *parent = nullptr);
+
+    QSize sizeHint() const override;
+};
 //! [0]
 
-//! [1]
-QSize Button::sizeHint() const
-//! [1] //! [2]
-{
-    QSize size = QToolButton::sizeHint();
-    size.rheight() += 20;
-    size.rwidth() = qMax(size.width(), size.height());
-    return size;
-}
-//! [2]
+#endif

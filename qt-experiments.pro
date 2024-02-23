@@ -5,47 +5,45 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 SOURCES += \
-    main.cpp \
-    window.cpp \
-    coloritem.cpp \
-    robot.cpp \
-    button.cpp \
-    calculator.cpp \
-    mainwindow.cpp \
-    optionsdialog.cpp \
-    src/qhexedit.cpp \
-    src/chunks.cpp \
-    src/commands.cpp \
-    searchdialog.cpp
+    src/main.cpp \
+    src/lineedits/lineedits.cpp \
+    src/calculator/button.cpp \
+    src/calculator/calculator.cpp \
+    src/dragdroprobot/coloritem.cpp \
+    src/dragdroprobot/robot.cpp \
+    src/hexeditor/hexwindow.cpp \
+    src/hexeditor/optionsdialog.cpp \
+    src/hexeditor/searchdialog.cpp \
+    src/hexeditor/qhexedit/qhexedit.cpp \
+    src/hexeditor/qhexedit/chunks.cpp \
+    src/hexeditor/qhexedit/commands.cpp
 
 HEADERS += \
-    window.h \
-    coloritem.h \
-    robot.h \
-    button.h \
-    calculator.h \
-    mainwindow.h \
-    optionsdialog.h \
-    src/qhexedit.h \
-    src/chunks.h \
-    src/commands.h \
-    searchdialog.h
+    src/lineedits/lineedits.h \
+    src/calculator/button.h \
+    src/calculator/calculator.h \
+    src/dragdroprobot/coloritem.h \
+    src/dragdroprobot/robot.h \
+    src/hexeditor/hexwindow.h \
+    src/hexeditor/optionsdialog.h \
+    src/hexeditor/searchdialog.h \
+    src/hexeditor/qhexedit/qhexedit.h \
+    src/hexeditor/qhexedit/chunks.h \
+    src/hexeditor/qhexedit/commands.h
 
 
 RESOURCES = \
-    qhexedit.qrc
+    src/hexeditor/qhexedit.qrc
 
 FORMS += \
-    optionsdialog.ui \
-    searchdialog.ui
+    src/hexeditor/optionsdialog.ui \
+    src/hexeditor/searchdialog.ui
 
 contains(QT_ARCH, i386) {
-    message("32-bit")
+    LIBS += "$$PWD/goLib/goLib32.a"
 } else {
-    message("64-bit")
+    LIBS += "$$PWD/goLib/goLib64.a"
 }
-
-LIBS += "$$PWD/goLib/goLib.a"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

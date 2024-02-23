@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "src/qhexedit.h"
+#include "qhexedit/qhexedit.h"
 #include "optionsdialog.h"
 #include "searchdialog.h"
 
@@ -16,12 +16,12 @@ class QDragEnterEvent;
 class QDropEvent;
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class HexWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow();
+    HexWindow();
 
 protected:
     void closeEvent(QCloseEvent *event);

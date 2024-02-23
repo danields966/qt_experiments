@@ -1,12 +1,22 @@
 /****************************************************************************
 **
-** Copyright (C) 2015 The Qt Company Ltd.
-** Contact: http://www.qt.io/licensing/
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** BSD License Usage
+** Alternatively, you may use this file under the terms of the BSD license
+** as follows:
 **
 ** "Redistribution and use in source and binary forms, with or without
 ** modification, are permitted provided that the following conditions are
@@ -38,38 +48,70 @@
 **
 ****************************************************************************/
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
 
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-class QComboBox;
 class QLineEdit;
 QT_END_NAMESPACE
+class Button;
 
 //! [0]
-class Window : public QWidget
+class Calculator : public QWidget
 {
     Q_OBJECT
 
 public:
-    Window();
+    Calculator(QWidget *parent = nullptr);
 
-public slots:
-    void echoChanged(int);
-    void validatorChanged(int);
-    void alignmentChanged(int);
-    void inputMaskChanged(int);
-    void accessChanged(int);
-
-private:
-    QLineEdit *echoLineEdit;
-    QLineEdit *validatorLineEdit;
-    QLineEdit *alignmentLineEdit;
-    QLineEdit *inputMaskLineEdit;
-    QLineEdit *accessLineEdit;
-};
+private slots:
+    void digitClicked();
+    void unaryOperatorClicked();
+    void additiveOperatorClicked();
+    void multiplicativeOperatorClicked();
+    void equalClicked();
+    void pointClicked();
+    void changeSignClicked();
+    void backspaceClicked();
+    void clear();
+    void clearAll();
+    void clearMemory();
+    void readMemory();
+    void setMemory();
+    void addToMemory();
 //! [0]
+
+//! [1]
+private:
+//! [1] //! [2]
+    Button *createButton(const QString &text, const char *member);
+    void abortOperation();
+    bool calculate(double rightOperand, const QString &pendingOperator);
+//! [2]
+
+//! [3]
+    double sumInMemory;
+//! [3] //! [4]
+    double sumSoFar;
+//! [4] //! [5]
+    double factorSoFar;
+//! [5] //! [6]
+    QString pendingAdditiveOperator;
+//! [6] //! [7]
+    QString pendingMultiplicativeOperator;
+//! [7] //! [8]
+    bool waitingForOperand;
+//! [8]
+
+//! [9]
+    QLineEdit *display;
+//! [9] //! [10]
+
+    enum { NumDigitButtons = 10 };
+    Button *digitButtons[NumDigitButtons];
+};
+//! [10]
 
 #endif

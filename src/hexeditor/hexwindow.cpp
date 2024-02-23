@@ -11,12 +11,12 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 
-#include "mainwindow.h"
+#include "hexwindow.h"
 
 /*****************************************************************************/
 /* Public methods */
 /*****************************************************************************/
-MainWindow::MainWindow()
+HexWindow::HexWindow()
 {
     setAcceptDrops( true );
     init();
@@ -26,20 +26,20 @@ MainWindow::MainWindow()
 /*****************************************************************************/
 /* Protected methods */
 /*****************************************************************************/
-void MainWindow::closeEvent(QCloseEvent *)
+void HexWindow::closeEvent(QCloseEvent *)
 {
     writeSettings();
 }
 
 
-void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+void HexWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     if (event->mimeData()->hasUrls())
         event->accept();
 }
 
 
-void MainWindow::dropEvent(QDropEvent *event)
+void HexWindow::dropEvent(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls())
     {
@@ -53,18 +53,18 @@ void MainWindow::dropEvent(QDropEvent *event)
 /*****************************************************************************/
 /* Private Slots */
 /*****************************************************************************/
-void MainWindow::about()
+void HexWindow::about()
 {
    QMessageBox::about(this, tr("About QHexEdit"),
             tr("The QHexEdit example is a short Demo of the QHexEdit Widget."));
 }
 
-void MainWindow::dataChanged()
+void HexWindow::dataChanged()
 {
     setWindowModified(hexEdit->isModified());
 }
 
-void MainWindow::open()
+void HexWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
     if (!fileName.isEmpty()) {
@@ -72,18 +72,18 @@ void MainWindow::open()
     }
 }
 
-void MainWindow::optionsAccepted()
+void HexWindow::optionsAccepted()
 {
     writeSettings();
     readSettings();
 }
 
-void MainWindow::findNext()
+void HexWindow::findNext()
 {
     searchDialog->findNext();
 }
 
-bool MainWindow::save()
+bool HexWindow::save()
 {
     if (isUntitled) {
         return saveAs();
@@ -92,7 +92,7 @@ bool MainWindow::save()
     }
 }
 
-bool MainWindow::saveAs()
+bool HexWindow::saveAs()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),
                                                     curFile);
@@ -102,7 +102,7 @@ bool MainWindow::saveAs()
     return saveFile(fileName);
 }
 
-void MainWindow::saveSelectionToReadableFile()
+void HexWindow::saveSelectionToReadableFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
     if (!fileName.isEmpty())
@@ -124,7 +124,7 @@ void MainWindow::saveSelectionToReadableFile()
     }
 }
 
-void MainWindow::saveToReadableFile()
+void HexWindow::saveToReadableFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
     if (!fileName.isEmpty())
@@ -146,12 +146,12 @@ void MainWindow::saveToReadableFile()
     }
 }
 
-void MainWindow::setAddress(qint64 address)
+void HexWindow::setAddress(qint64 address)
 {
     lbAddress->setText(QString("%1").arg(address, 1, 16));
 }
 
-void MainWindow::setOverwriteMode(bool mode)
+void HexWindow::setOverwriteMode(bool mode)
 {
     QSettings settings;
     settings.setValue("OverwriteMode", mode);
@@ -161,17 +161,17 @@ void MainWindow::setOverwriteMode(bool mode)
         lbOverwriteMode->setText(tr("Insert"));
 }
 
-void MainWindow::setSize(qint64 size)
+void HexWindow::setSize(qint64 size)
 {
     lbSize->setText(QString("%1").arg(size));
 }
 
-void MainWindow::showOptionsDialog()
+void HexWindow::showOptionsDialog()
 {
     optionsDialog->show();
 }
 
-void MainWindow::showSearchDialog()
+void HexWindow::showSearchDialog()
 {
     searchDialog->show();
 }
@@ -179,7 +179,7 @@ void MainWindow::showSearchDialog()
 /*****************************************************************************/
 /* Private Methods */
 /*****************************************************************************/
-void MainWindow::init()
+void HexWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
     optionsDialog = new OptionsDialog(this);
@@ -202,7 +202,7 @@ void MainWindow::init()
     setUnifiedTitleAndToolBarOnMac(true);
 }
 
-void MainWindow::createActions()
+void HexWindow::createActions()
 {
     openAct = new QAction(QIcon(":/images/open.png"), tr("&Open..."), this);
     openAct->setShortcuts(QKeySequence::Open);
@@ -263,7 +263,7 @@ void MainWindow::createActions()
     connect(optionsAct, SIGNAL(triggered()), this, SLOT(showOptionsDialog()));
 }
 
-void MainWindow::createMenus()
+void HexWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openAct);
@@ -288,7 +288,7 @@ void MainWindow::createMenus()
     helpMenu->addAction(aboutQtAct);
 }
 
-void MainWindow::createStatusBar()
+void HexWindow::createStatusBar()
 {
     // Address Label
     lbAddressName = new QLabel();
@@ -326,7 +326,7 @@ void MainWindow::createStatusBar()
     statusBar()->showMessage(tr("Ready"), 2000);
 }
 
-void MainWindow::createToolBars()
+void HexWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(openAct);
@@ -337,7 +337,7 @@ void MainWindow::createToolBars()
     editToolBar->addAction(findAct);
 }
 
-void MainWindow::loadFile(const QString &fileName)
+void HexWindow::loadFile(const QString &fileName)
 {
     file.setFileName(fileName);
     if (!hexEdit->setData(file)) {
@@ -351,7 +351,7 @@ void MainWindow::loadFile(const QString &fileName)
     statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
-void MainWindow::readSettings()
+void HexWindow::readSettings()
 {
     QSettings settings;
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
@@ -379,7 +379,7 @@ void MainWindow::readSettings()
     hexEdit->setHexCaps(settings.value("HexCaps", true).toBool());
 }
 
-bool MainWindow::saveFile(const QString &fileName)
+bool HexWindow::saveFile(const QString &fileName)
 {
     QString tmpFileName = fileName + ".~tmp";
 
@@ -409,7 +409,7 @@ bool MainWindow::saveFile(const QString &fileName)
     return true;
 }
 
-void MainWindow::setCurrentFile(const QString &fileName)
+void HexWindow::setCurrentFile(const QString &fileName)
 {
     curFile = QFileInfo(fileName).canonicalFilePath();
     isUntitled = fileName.isEmpty();
@@ -420,12 +420,12 @@ void MainWindow::setCurrentFile(const QString &fileName)
         setWindowFilePath(curFile + " - QHexEdit");
 }
 
-QString MainWindow::strippedName(const QString &fullFileName)
+QString HexWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
 }
 
-void MainWindow::writeSettings()
+void HexWindow::writeSettings()
 {
     QSettings settings;
     settings.setValue("pos", pos());
