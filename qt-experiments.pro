@@ -39,6 +39,12 @@ FORMS += \
     optionsdialog.ui \
     searchdialog.ui
 
+contains(QT_ARCH, i386) {
+    message("32-bit")
+} else {
+    message("64-bit")
+}
+
 LIBS += "$$PWD/goLib/goLib.a"
 
 # Default rules for deployment.

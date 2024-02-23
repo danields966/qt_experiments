@@ -11,7 +11,7 @@ Install requirements:
     
     sudo apt install git p7zip-full qtcreator
     
-    sudo apt install libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev libglu1-mesa-dev libdrm-dev libxdamage-dev libglapi-mesa libglapi-mesa libxext6 libxxf86vm-dev libc6-dev libssl-dev libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libpulse-dev libasound2-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libwayland-dev
+    sudo apt install libgl1-mesa-dev:i386 libglu1-mesa-dev:i386 mesa-common-dev:i386 libglu1-mesa-dev:i386 libdrm-dev:i386 libxdamage-dev:i386 libglapi-mesa:i386 libglapi-mesa:i386 libxext6:i386 libxxf86vm-dev:i386 libc6-dev:i386 libssl-dev:i386 libfontconfig1-dev:i386 libfreetype6-dev:i386 libx11-dev:i386 libx11-xcb-dev:i386 libxext-dev:i386 libxfixes-dev:i386 libxi-dev:i386 libxrender-dev:i386 libxcb1-dev:i386 libxcb-glx0-dev:i386 libxcb-keysyms1-dev:i386 libxcb-image0-dev:i386 libxcb-shm0-dev:i386 libxcb-icccm4-dev:i386 libxcb-sync-dev:i386 libxcb-xfixes0-dev:i386 libxcb-shape0-dev:i386 libxcb-randr0-dev:i386 libxcb-render-util0-dev:i386 libxcb-util-dev:i386 libxcb-xinerama0:i386 libxcb-xinerama0-dev:i386 libxcb-xkb-dev:i386 libxkbcommon-dev:i386 libxkbcommon-x11-dev:i386 libpulse-dev:i386 libasound2-dev:i386 libgstreamer1.0-dev:i386 libgstreamer-plugins-base1.0-dev:i386 libwayland-dev:i386
 
 Clone Qt 5.15:
 
