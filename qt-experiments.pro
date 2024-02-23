@@ -19,6 +19,7 @@ SOURCES += \
     src/hexeditor/qhexedit/commands.cpp
 
 HEADERS += \
+    src/main.h \
     src/lineedits/lineedits.h \
     src/calculator/button.h \
     src/calculator/calculator.h \

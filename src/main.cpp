@@ -2,6 +2,7 @@
 #include <QtWidgets>
 #include <QIcon>
 
+#include "main.h"
 #include "lineedits/lineedits.h"
 #include "calculator/calculator.h"
 #include "dragdroprobot/coloritem.h"
@@ -12,6 +13,13 @@ int main(int argc, char **argv)
 {
 
     QApplication app(argc, argv);
+
+    QMessageBox msgBox;
+    msgBox.setText("Hello from Golang! " + QString::number(fact(10)));
+    msgBox.exec();
+
+    QTextStream out(stdout);
+    out << "Logging some stuff" << Qt::endl;
 
     // Line Edits
     LineEdits lineedits;
@@ -65,4 +73,3 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
-
