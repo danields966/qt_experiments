@@ -2,7 +2,7 @@
 
 ## Qt 5.15 static build instructions for Linux:
 
-### Ubuntu 18.04
+### Ubuntu 16.04
 
 Install requirements:
 
@@ -45,7 +45,7 @@ Compile Qt:
     sudo rm -rf /usr/local/Qt-5.15-release/
     sudo make install
 
-For i686 just replace configure argument `-platform linux-g++-64` to `-platform linux-g++-32`
+For 32-bit just replace configure argument `-platform linux-g++-64` to `-platform linux-g++-32`
 
 Example of shared requirements of compiled binary with this setup:
 
@@ -90,7 +90,12 @@ Output:
 
 ## Qt 5.15 static build instructions for Windows 11 (MinGW 8.1.0):
 
-Download, unpack and add to PATH compiler MinGW `i686-8.1.0-release-posix-dwarf-rt_v6-rev0`, then
+Install the following requirements:
+
+* 7-Zip 19.00
+* Git 2.37.1
+* Python 3.7.9
+* Strawberry Perl 5.26.0.1
 
 Clone Qt 5.15:
 
@@ -98,6 +103,7 @@ Clone Qt 5.15:
     ren qt5 "Qt-5.15"
     cd Qt-5.15
     git clone -b 5.15 https://code.qt.io/qt/qtbase.git
+    cd ..
 
 Or:
 
@@ -106,15 +112,31 @@ Or:
     $QtDistro7z = "$QtDistro.7z"
     Invoke-WebRequest "http://danields966.ru:9724/$QtDistro7z" -OutFile "$QtDistro7z"
     & 'C:\Program Files\7-Zip\7z.exe' x $QtDistro7z -o"."
-    cd Qt-5.15
+
+Download and add MinGW distro to PATH:
+
+32-bit:
+
+    $ProgressPreference = "SilentlyContinue"
+    $MinGWDistro7z = "i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z"
+    Invoke-WebRequest "http://danields966.ru:9724/$MinGWDistro7z" -OutFile "$MinGWDistro7z"
+    & 'C:\Program Files\7-Zip\7z.exe' x $MinGWDistro7z -o"."
+    $env:PATH = "$PWD\mingw32\bin;" + $env:PATH
+
+64-bit:
+
+    $ProgressPreference = "SilentlyContinue"
+    $MinGWDistro7z = "x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z"
+    Invoke-WebRequest "http://danields966.ru:9724/$MinGWDistro7z" -OutFile "$MinGWDistro7z"
+    & 'C:\Program Files\7-Zip\7z.exe' x $MinGWDistro7z -o"."
+    $env:PATH = "$PWD\mingw64\bin;" + $env:PATH
 
 Compile Qt:
 
+    cd Qt-5.15
     git submodule foreach --recursive "git clean -dfx"
     
     ./configure -v -prefix "C:\Qt\Qt-5.15-debug-and-release" -platform win32-g++ -no-avx -c++std c++14 -static -optimize-size -static-runtime -debug-and-release -opensource -confirm-license -nomake examples -nomake tests -nomake tools -no-angle -no-cups -no-dbus -no-fontconfig -no-gif -no-iconv -no-icu -no-incredibuild-xge -no-opengl -no-openssl -no-openvg -no-pch -no-sql-sqlite -no-ssl -make libs -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -skip qt3d -skip qtactiveqt -skip qtandroidextras -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdeclarative -skip qtdoc -skip qtdocgallery -skip qtfeedback -skip qtgamepad -skip qtgraphicaleffects -skip qtimageformats -skip qtlocation -skip qtlottie -skip qtmacextras -skip qtmultimedia -skip qtnetworkauth -skip qtpim -skip qtpurchasing -skip qtqa -skip qtquick3d -skip qtquickcontrols -skip qtquickcontrols2 -skip qtquicktimeline -skip qtremoteobjects -skip qtrepotools -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtsvg -skip qtsystems -skip qttools -skip qttranslations -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebglplugin -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip qtxmlpatterns
     
     mingw32-make
     mingw32-make install
-
-For x86_64 compilation all instructions are the same, just replace compiler to `x86_64-8.1.0-release-posix-seh-rt_v6-rev0`
