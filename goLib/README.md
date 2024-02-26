@@ -57,3 +57,23 @@ To build lib for Windows XP, use Golang distro `go1.10.windows-386.zip` for 32-b
     export PATH=$PATH:/usr/local/go/bin
     go version
     go build -o goLib64.a -buildmode c-archive goLib.go
+
+## Build Golang lib on FreeBSD
+
+### 32-bit:
+
+    export GOLANGDISTRO=go1.20.freebsd-386.tar.gz
+    wget https://go.dev/dl/$GOLANGDISTRO
+    rm -rf /usr/local/go && tar -C /usr/local -xzf $GOLANGDISTRO
+    export PATH=$PATH:/usr/local/go/bin
+    go version
+    go build -o goLib32.a -buildmode c-archive goLib.go
+
+### 64-bit:
+
+    export GOLANGDISTRO=go1.20.freebsd-amd64.tar.gz
+    wget https://go.dev/dl/$GOLANGDISTRO
+    rm -rf /usr/local/go && tar -C /usr/local -xzf $GOLANGDISTRO
+    export PATH=$PATH:/usr/local/go/bin
+    go version
+    go build -o goLib64.a -buildmode c-archive goLib.go
