@@ -141,7 +141,12 @@ Compile Qt:
     mingw32-make
     mingw32-make install
 
-### Qt 5.15 static build instructions for FreeBSD 12.4
+### Qt 5.15 static build instructions for FreeBSD 13.2
+
+Install requirements (GCC 12.2.0, perl 5.36.3):
+
+    pkg install git gcc nano curl wget 7-zip
+    git clone -b testing https://github.com/danields966/qt-experiments.git
 
 Install Xorg and Xfce for better appearance:
 
@@ -155,10 +160,11 @@ Install Xorg and Xfce for better appearance:
     echo "exec /usr/local/bin/startxfce4 --with-ck-launch" > ~/.xinitrc
     startx
 
-Install requirements (GCC 12.2.0, perl 5.36.3):
+Or you can install it with script `freebsd-xfce-init.sh`:
 
-    pkg install git gcc nano curl wget 7-zip
-    pkg install -g libx* libX*
+    cd qt-experiments
+    chmod + x freebsd-xfce-init.sh
+    ./freebsd-xfce-init.sh
 
 Clone Qt 5.15:
 
@@ -173,13 +179,14 @@ Or:
     7z x Qt-5.15.7z
     cd Qt-5.15
 
-Apply patch to remove xinerama:
+Apply patch to remove xinerama and fix xkbcommon:
 
     cd ..
-    git clone -b testing https://github.com/danields966/qt-experiments.git
     cp qt-experiments/remove-xinerama.patch Qt-5.15/qtbase/
+    cp qt-experiments/fix-xkbcommon.patch Qt-5.15/qtbase/
     cd Qt-5.15/qtbase
     git apply remove-xinerama.patch
+    git apply fix-xkbcommon.patch
     cd ..
 
 Compile Qt:
