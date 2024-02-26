@@ -162,8 +162,9 @@ Install Xorg and Xfce for better appearance:
 
 Or you can install it with script `freebsd-xfce-init.sh`:
 
+    pkg install xorg drm-kmod xfce
     cd qt-experiments
-    chmod + x freebsd-xfce-init.sh
+    chmod +x freebsd-xfce-init.sh
     ./freebsd-xfce-init.sh
 
 Clone Qt 5.15:
