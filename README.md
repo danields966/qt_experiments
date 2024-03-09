@@ -2,7 +2,25 @@
 
 For Windows XP and older Linux versions a better option is Qt 5.6
 
-## Qt 5.6 static build instructions for Linux:
+## Qt 5.6 static build instructions for different platforms:
+
+* [Windows 10 x86](doc/Qt-5.6/win-x86.md)
+* [Windows 10 x64](doc/Qt-5.6/win-x64.md)
+* [Ubuntu 16.04 x86](doc/Qt-5.6/linux-x86.md)
+* [Ubuntu 16.04 x64](doc/Qt-5.6/linux-x64.md)
+* [FreeBSD 14.0 x86](doc/Qt-5.6/freebsd-x86.md)
+* [FreeBSD 14.0 x64](doc/Qt-5.6/freebsd-x64.md)
+* [MacOS x64](doc/Qt-5.6/macos-x64.md)
+
+## Qt 5.15 static build instructions for different platforms:
+
+* [Windows 10 x86](doc/Qt-5.15/win-x86.md)
+* [Windows 10 x64](doc/Qt-5.15/win-x64.md)
+* [Ubuntu 16.04 x86](doc/Qt-5.15/linux-x86.md)
+* [Ubuntu 16.04 x64](doc/Qt-5.15/linux-x64.md)
+* [FreeBSD 14.0 x86](doc/Qt-5.15/freebsd-x86.md)
+* [FreeBSD 14.0 x64](doc/Qt-5.15/freebsd-x64.md)
+* [MacOS x64](doc/Qt-5.15/macos-x64.md)
 
 ### Ubuntu 16.04
 

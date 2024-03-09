@@ -14,9 +14,11 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
 
+#ifdef GOLANG_LIB
     QMessageBox msgBox;
     msgBox.setText("Hello from Golang! " + QString::number(fact(10)));
     msgBox.exec();
+#endif
 
     QTextStream out(stdout);
     out << "Logging some stuff" << Qt::endl;

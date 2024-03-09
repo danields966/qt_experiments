@@ -41,9 +41,21 @@ FORMS += \
     src/hexeditor/searchdialog.ui
 
 contains(QT_ARCH, i386) {
-    LIBS += "$$PWD/goLib/goLib32.a"
+    LIB_PATH = "$$PWD/goLib/goLib32.a"
+    exists($${LIB_PATH}) {
+        LIBS += $${LIB_PATH}
+        DEFINES += GOLANG_LIB=1
+    } else {
+        message("Skipping Golang library for i386 build")
+    }
 } else {
-    LIBS += "$$PWD/goLib/goLib64.a"
+    LIB_PATH = "$$PWD/goLib/goLib64.a"
+    exists($${LIB_PATH}) {
+        LIBS += $${LIB_PATH}
+        DEFINES += GOLANG_LIB=1
+    } else {
+        message("Skipping Golang library for amd64 build")
+    }
 }
 
 # Default rules for deployment.
