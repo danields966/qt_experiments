@@ -6,8 +6,8 @@ RUN \
     apt -y update && \
     apt -y upgrade && \
     apt -y install \
-        binutils-mingw-w64-i686 mingw-w64-i686-dev g++-mingw-w64-i686 gcc-mingw-w64-i686 \
-        build-essential python perl git wget nano p7zip-full && \
+        build-essential python perl git wget nano p7zip-full golang-go \
+        binutils-mingw-w64-i686 mingw-w64-i686-dev g++-mingw-w64-i686 gcc-mingw-w64-i686 && \
     update-alternatives --set i686-w64-mingw32-gcc /usr/bin/i686-w64-mingw32-gcc-posix && \
     update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix && \
     apt -y autoremove && \

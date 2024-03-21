@@ -47,6 +47,7 @@ qt-experiments-*
 *.*#
 core
 !core/
+goLib/*.h
 tags
 .DS_Store
 .directory

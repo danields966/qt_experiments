@@ -41,8 +41,14 @@ FORMS += \
 
 GO_SOURCE_PATH = "$$PWD/goLib/goLib.go"
 GO_LIB_PATH = "$$PWD/goLib/goLib.a"
+GO_CC = "gcc"
 win32 {
     GOOS = "windows"
+    contains(QT_ARCH, i386) {
+        GO_CC = "i686-w64-mingw32-gcc"
+    } else {
+        GO_CC = "x86_64-w64-mingw32-gcc"
+    }
 }
 linux {
     GOOS = "linux"
@@ -60,7 +66,9 @@ contains(QT_ARCH, i386) {
     }
 }
 
-system(GOOS=$${GOOS} GOARCH=$${GOARCH} go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH})
+message("GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1 go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH}")
+system(GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1 go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH})
+
 exists($${GO_LIB_PATH}) {
     LIBS += $${GO_LIB_PATH}
     DEFINES += GOLANG_LIB=1

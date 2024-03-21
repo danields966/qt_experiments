@@ -6,7 +6,7 @@ RUN \
     apt -y update && \
     apt -y upgrade && \
     apt -y install \
-        build-essential python perl git wget nano p7zip-full \
+        build-essential python perl git wget nano p7zip-full golang-go \
         libfontconfig1-dev libfreetype6-dev libxrender-dev libxcb-render0-dev libxcb-render-util0-dev \
         libxcb-shape0-dev libxcb-randr0-dev libxcb-xfixes0-dev libxcb-sync-dev libxcb-shm0-dev \
         libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-image0-dev libxkbcommon-dev libxkbcommon-x11-dev \
