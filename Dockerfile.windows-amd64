@@ -6,7 +6,7 @@ RUN \
     apt -y update && \
     apt -y upgrade && \
     apt -y install \
-        build-essential python perl git wget nano p7zip-full golang-go \
+        build-essential python perl git wget nano p7zip-full \
         binutils-mingw-w64-x86-64 mingw-w64-x86-64-dev g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 && \
     update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix && \
     update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix && \
@@ -15,6 +15,17 @@ RUN \
     apt -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     exit 0
+
+RUN \
+    set -eux && \
+    export GOLANGDISTRO=go1.20.linux-amd64.tar.gz && \
+    wget -q https://go.dev/dl/$GOLANGDISTRO && \
+    tar -C /usr/local -xzf $GOLANGDISTRO && \
+    update-alternatives --install /usr/local/bin/go go /usr/local/go/bin/go 1 && \
+    export PATH=$PATH:/usr/local/go/bin && \
+    go version && \
+    exit 0
+
 
 RUN \
     set -eux && \
