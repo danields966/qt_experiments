@@ -66,11 +66,10 @@ contains(QT_ARCH, i386) {
     }
 }
 
-win32 {
+contains(QMAKE_HOST.os, Windows) {
     # TODO: Still not working, fix
     GO_BUILD_CMD_ENVS = '$env:GOOS="$${GOOS}"; $env:GOARCH="$${GOARCH}"; $env:CC="$${GO_CC}"; $env:CGO_ENABLED=1;'
-}
-linux | macx {
+} else {
     GO_BUILD_CMD_ENVS = 'GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1'
 }
 
