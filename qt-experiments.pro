@@ -66,8 +66,17 @@ contains(QT_ARCH, i386) {
     }
 }
 
-message("GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1 go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH}")
-system(GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1 go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH})
+win32 {
+    # TODO: Still not working, fix
+    GO_BUILD_CMD_ENVS = '$env:GOOS="$${GOOS}"; $env:GOARCH="$${GOARCH}"; $env:CC="$${GO_CC}"; $env:CGO_ENABLED=1;'
+}
+linux | macx {
+    GO_BUILD_CMD_ENVS = 'GOOS=$${GOOS} GOARCH=$${GOARCH} CC=$${GO_CC} CGO_ENABLED=1'
+}
+
+GO_BUILD_CMD = "$${GO_BUILD_CMD_ENVS} go build -o $${GO_LIB_PATH} -buildmode c-archive $${GO_SOURCE_PATH}"
+message($${GO_BUILD_CMD})
+system($${GO_BUILD_CMD})
 
 exists($${GO_LIB_PATH}) {
     LIBS += $${GO_LIB_PATH}
