@@ -86,7 +86,7 @@ exists($${GO_LIB_PATH}) {
     LIBS += $${GO_LIB_PATH}
     DEFINES += GOLANG_LIB=1
 
-    contains(QMAKE_HOST.os, Darwin) {
+    macx {
         system("x86_64h-apple-darwin18-ar -s $${GO_LIB_PATH}")
     }
 } else {
