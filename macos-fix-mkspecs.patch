@@ -31,6 +31,31 @@ index a32ceacb6c..f8b2cc6a4f 100644
 
  ifeq ($(QT_MAC_SDK_NO_VERSION_CHECK),)
      CHECK_SDK_COMMAND = /usr/bin/xcrun --sdk $(EXPORT_QMAKE_MAC_SDK) -show-sdk-version 2>/dev/null
+diff --git a/src/corelib/kernel/qcore_mac.mm b/src/corelib/kernel/qcore_mac.mm
+index 99ad4ce666..7185afbcc3 100644
+--- a/src/corelib/kernel/qcore_mac.mm
++++ b/src/corelib/kernel/qcore_mac.mm
+@@ -320,13 +320,13 @@ QDebug operator<<(QDebug debug, const QCFString &string)
+ #ifdef Q_OS_MACOS
+ bool qt_mac_applicationIsInDarkMode()
+ {
+-#if QT_MACOS_PLATFORM_SDK_EQUAL_OR_ABOVE(__MAC_10_14)
+-    if (__builtin_available(macOS 10.14, *)) {
+-        auto appearance = [NSApp.effectiveAppearance bestMatchFromAppearancesWithNames:
+-                @[ NSAppearanceNameAqua, NSAppearanceNameDarkAqua ]];
+-        return [appearance isEqualToString:NSAppearanceNameDarkAqua];
+-    }
+-#endif
++//#if QT_MACOS_PLATFORM_SDK_EQUAL_OR_ABOVE(__MAC_10_14)
++//    if (__builtin_available(macOS 10.14, *)) {
++//        auto appearance = [NSApp.effectiveAppearance bestMatchFromAppearancesWithNames:
++//                @[ NSAppearanceNameAqua, NSAppearanceNameDarkAqua ]];
++//        return [appearance isEqualToString:NSAppearanceNameDarkAqua];
++//    }
++//#endif
+     return false;
+ }
+
 diff --git a/src/plugins/platforms/cocoa/qcocoatheme.mm b/src/plugins/platforms/cocoa/qcocoatheme.mm
 index b6ab9c0bbc..b63131347a 100644
 --- a/src/plugins/platforms/cocoa/qcocoatheme.mm
