@@ -56,9 +56,11 @@ linux {
 macx {
     GOOS = "darwin"
     contains(QT_ARCH, arm64) {
-        GO_CC = "arm64-apple-darwin18-cc"
+        GO_CC = "arm64-apple-darwin20.2-cc"
+        AR_NAME = "arm64-apple-darwin20.2-ar"
     } else {
         GO_CC = "x86_64-apple-darwin18-cc"
+        AR_NAME = "x86_64h-apple-darwin18-ar"
     }
 }
 contains(QT_ARCH, i386) {
@@ -87,7 +89,7 @@ exists($${GO_LIB_PATH}) {
     DEFINES += GOLANG_LIB=1
 
     macx {
-        system("x86_64h-apple-darwin18-ar -s $${GO_LIB_PATH}")
+        system("$${AR_NAME} -s $${GO_LIB_PATH}")
     }
 } else {
     message("Skipping Golang library for build")
