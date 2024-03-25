@@ -85,6 +85,10 @@ system($${GO_BUILD_CMD})
 exists($${GO_LIB_PATH}) {
     LIBS += $${GO_LIB_PATH}
     DEFINES += GOLANG_LIB=1
+
+    contains(QMAKE_HOST.os, Darwin) {
+        system("x86_64h-apple-darwin18-ar -s $${GO_LIB_PATH}")
+    }
 } else {
     message("Skipping Golang library for build")
 }
