@@ -55,6 +55,11 @@ linux {
 }
 macx {
     GOOS = "darwin"
+    contains(QT_ARCH, arm64) {
+        GO_CC = "arm64-apple-darwin18-cc"
+    } else {
+        GO_CC = "x86_64-apple-darwin18-cc"
+    }
 }
 contains(QT_ARCH, i386) {
     GOARCH = "386"
