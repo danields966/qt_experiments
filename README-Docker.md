@@ -48,3 +48,7 @@
 * Windows build
 
         docker cp qt-${TARGET}:/opt/qt-experiments/release/qt-experiments.exe qt-experiments-${TARGET}.exe
+
+* MacOS build
+
+        docker cp qt-${TARGET}:/opt/qt-experiments/qt-experiments.app qt-experiments-${TARGET}.app

@@ -7,9 +7,6 @@ ARG GOLANG_DISTRO_URL="https://go.dev/dl/$GOLANG_DISTRO"
 ARG CMAKE_VERSION="cmake-3.14.5-Linux-x86_64"
 ARG CMAKE_DISTRO="${CMAKE_VERSION}.tar.gz"
 ARG CMAKE_DISTRO_URL="https://cmake.org/files/v3.14/$CMAKE_DISTRO"
-ARG QT_VERSION="Qt-5.15"
-ARG QT_DISTRO="${QT_VERSION}.tar.gz"
-ARG QT_DISTRO_URL="http://danields966.ru:9724/$QT_DISTRO"
 
 RUN \
     set -eux && \
