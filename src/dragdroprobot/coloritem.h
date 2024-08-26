@@ -1,12 +1,22 @@
 /****************************************************************************
 **
-** Copyright (C) 2015 The Qt Company Ltd.
-** Contact: http://www.qt.io/licensing/
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** BSD License Usage
+** Alternatively, you may use this file under the terms of the BSD license
+** as follows:
 **
 ** "Redistribution and use in source and binary forms, with or without
 ** modification, are permitted provided that the following conditions are
@@ -38,37 +48,27 @@
 **
 ****************************************************************************/
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef COLORITEM_H
+#define COLORITEM_H
 
-#include <QWidget>
-
-QT_BEGIN_NAMESPACE
-class QComboBox;
-class QLineEdit;
-QT_END_NAMESPACE
+#include <QGraphicsItem>
 
 //! [0]
-class Window : public QWidget
+class ColorItem : public QGraphicsItem
 {
-    Q_OBJECT
-
 public:
-    Window();
+    ColorItem();
 
-public slots:
-    void echoChanged(int);
-    void validatorChanged(int);
-    void alignmentChanged(int);
-    void inputMaskChanged(int);
-    void accessChanged(int);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
-    QLineEdit *echoLineEdit;
-    QLineEdit *validatorLineEdit;
-    QLineEdit *alignmentLineEdit;
-    QLineEdit *inputMaskLineEdit;
-    QLineEdit *accessLineEdit;
+    QColor color;
 };
 //! [0]
 

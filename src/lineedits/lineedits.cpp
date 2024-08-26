@@ -1,12 +1,22 @@
 /****************************************************************************
 **
-** Copyright (C) 2015 The Qt Company Ltd.
-** Contact: http://www.qt.io/licensing/
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** BSD License Usage
+** Alternatively, you may use this file under the terms of the BSD license
+** as follows:
 **
 ** "Redistribution and use in source and binary forms, with or without
 ** modification, are permitted provided that the following conditions are
@@ -38,22 +48,18 @@
 **
 ****************************************************************************/
 
-#include <QtWidgets>
-#include <QTextStream>
+#include "lineedits.h"
 
-#include "window.h"
-#include "goLib/goLib.h"
+#include <QComboBox>
+#include <QGridLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
 
 //! [0]
-Window::Window()
+LineEdits::LineEdits(QWidget *parent)
+    : QWidget(parent)
 {
-    QMessageBox msgBox;
-    msgBox.setText("Hello from Golang! " + QString::number(fact(10)));
-    msgBox.exec();
-
-    QTextStream out(stdout);
-    out << "Logging some stuff" << endl;
-
     QGroupBox *echoGroup = new QGroupBox(tr("Echo"));
 
     QLabel *echoLabel = new QLabel(tr("Mode:"));
@@ -66,9 +72,9 @@ Window::Window()
     echoLineEdit = new QLineEdit;
     echoLineEdit->setPlaceholderText("Placeholder Text");
     echoLineEdit->setFocus();
-    //! [0]
+//! [0]
 
-    //! [1]
+//! [1]
     QGroupBox *validatorGroup = new QGroupBox(tr("Validator"));
 
     QLabel *validatorLabel = new QLabel(tr("Type:"));
@@ -79,9 +85,9 @@ Window::Window()
 
     validatorLineEdit = new QLineEdit;
     validatorLineEdit->setPlaceholderText("Placeholder Text");
-    //! [1]
+//! [1]
 
-    //! [2]
+//! [2]
     QGroupBox *alignmentGroup = new QGroupBox(tr("Alignment"));
 
     QLabel *alignmentLabel = new QLabel(tr("Type:"));
@@ -92,9 +98,9 @@ Window::Window()
 
     alignmentLineEdit = new QLineEdit;
     alignmentLineEdit->setPlaceholderText("Placeholder Text");
-    //! [2]
+//! [2]
 
-    //! [3]
+//! [3]
     QGroupBox *inputMaskGroup = new QGroupBox(tr("Input mask"));
 
     QLabel *inputMaskLabel = new QLabel(tr("Type:"));
@@ -106,9 +112,9 @@ Window::Window()
 
     inputMaskLineEdit = new QLineEdit;
     inputMaskLineEdit->setPlaceholderText("Placeholder Text");
-    //! [3]
+//! [3]
 
-    //! [4]
+//! [4]
     QGroupBox *accessGroup = new QGroupBox(tr("Access"));
 
     QLabel *accessLabel = new QLabel(tr("Read-only:"));
@@ -118,30 +124,30 @@ Window::Window()
 
     accessLineEdit = new QLineEdit;
     accessLineEdit->setPlaceholderText("Placeholder Text");
-    //! [4]
+//! [4]
 
-    //! [5]
-    connect(echoComboBox, SIGNAL(activated(int)),
-            this, SLOT(echoChanged(int)));
-    connect(validatorComboBox, SIGNAL(activated(int)),
-            this, SLOT(validatorChanged(int)));
-    connect(alignmentComboBox, SIGNAL(activated(int)),
-            this, SLOT(alignmentChanged(int)));
-    connect(inputMaskComboBox, SIGNAL(activated(int)),
-            this, SLOT(inputMaskChanged(int)));
-    connect(accessComboBox, SIGNAL(activated(int)),
-            this, SLOT(accessChanged(int)));
-    //! [5]
+//! [5]
+    connect(echoComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &LineEdits::echoChanged);
+    connect(validatorComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &LineEdits::validatorChanged);
+    connect(alignmentComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &LineEdits::alignmentChanged);
+    connect(inputMaskComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &LineEdits::inputMaskChanged);
+    connect(accessComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &LineEdits::accessChanged);
+//! [5]
 
-    //! [6]
+//! [6]
     QGridLayout *echoLayout = new QGridLayout;
     echoLayout->addWidget(echoLabel, 0, 0);
     echoLayout->addWidget(echoComboBox, 0, 1);
     echoLayout->addWidget(echoLineEdit, 1, 0, 1, 2);
     echoGroup->setLayout(echoLayout);
-    //! [6]
+//! [6]
 
-    //! [7]
+//! [7]
     QGridLayout *validatorLayout = new QGridLayout;
     validatorLayout->addWidget(validatorLabel, 0, 0);
     validatorLayout->addWidget(validatorComboBox, 0, 1);
@@ -165,9 +171,9 @@ Window::Window()
     accessLayout->addWidget(accessComboBox, 0, 1);
     accessLayout->addWidget(accessLineEdit, 1, 0, 1, 2);
     accessGroup->setLayout(accessLayout);
-    //! [7]
+//! [7]
 
-    //! [8]
+//! [8]
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(echoGroup, 0, 0);
     layout->addWidget(validatorGroup, 1, 0);
@@ -181,7 +187,7 @@ Window::Window()
 //! [8]
 
 //! [9]
-void Window::echoChanged(int index)
+void LineEdits::echoChanged(int index)
 {
     switch (index) {
     case 0:
@@ -195,16 +201,17 @@ void Window::echoChanged(int index)
         break;
     case 3:
         echoLineEdit->setEchoMode(QLineEdit::NoEcho);
+        break;
     }
 }
 //! [9]
 
 //! [10]
-void Window::validatorChanged(int index)
+void LineEdits::validatorChanged(int index)
 {
     switch (index) {
     case 0:
-        validatorLineEdit->setValidator(0);
+        validatorLineEdit->setValidator(nullptr);
         break;
     case 1:
         validatorLineEdit->setValidator(new QIntValidator(
@@ -212,7 +219,8 @@ void Window::validatorChanged(int index)
         break;
     case 2:
         validatorLineEdit->setValidator(new QDoubleValidator(-999.0,
-                                                             999.0, 2, validatorLineEdit));
+            999.0, 2, validatorLineEdit));
+        break;
     }
 
     validatorLineEdit->clear();
@@ -220,7 +228,7 @@ void Window::validatorChanged(int index)
 //! [10]
 
 //! [11]
-void Window::alignmentChanged(int index)
+void LineEdits::alignmentChanged(int index)
 {
     switch (index) {
     case 0:
@@ -231,12 +239,13 @@ void Window::alignmentChanged(int index)
         break;
     case 2:
         alignmentLineEdit->setAlignment(Qt::AlignRight);
+        break;
     }
 }
 //! [11]
 
 //! [12]
-void Window::inputMaskChanged(int index)
+void LineEdits::inputMaskChanged(int index)
 {
     switch (index) {
     case 0:
@@ -252,12 +261,13 @@ void Window::inputMaskChanged(int index)
         break;
     case 3:
         inputMaskLineEdit->setInputMask(">AAAAA-AAAAA-AAAAA-AAAAA-AAAAA;#");
+        break;
     }
 }
 //! [12]
 
 //! [13]
-void Window::accessChanged(int index)
+void LineEdits::accessChanged(int index)
 {
     switch (index) {
     case 0:
@@ -265,6 +275,7 @@ void Window::accessChanged(int index)
         break;
     case 1:
         accessLineEdit->setReadOnly(true);
+        break;
     }
 }
 //! [13]

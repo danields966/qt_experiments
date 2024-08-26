@@ -31,6 +31,7 @@
 *.exe
 *.out
 *.app
+qt-experiments-*
 
 # Other generated files
 *~
@@ -46,6 +47,7 @@
 *.*#
 core
 !core/
+goLib/*.h
 tags
 .DS_Store
 .directory
@@ -92,6 +94,9 @@ CMakeLists.txt.user*
 
 # Python byte code
 *.pyc
+
+# Qt source code
+Qt-*
 
 # Golang distros
 go/
