@@ -6,6 +6,8 @@
 
 * windows-i386
 * windows-amd64
+* macos-amd64
+* macos-arm64
 * linux-i386
 * linux-amd64
 * linux-arm64
